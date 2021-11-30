@@ -2,7 +2,7 @@
 # wmake -f Makefile.os2
 #
 # Remember to edit DEPS_INC and DEPS_LIB below to meet
-# your own environment!.
+# your own environment!
 
 LIBNAME = SDL2gfx
 VERSION = 1.0.4
@@ -54,7 +54,7 @@ $(LNKFILE):
   @%append $@ NAME $(LIBNAME)
   @for %i in ($(OBJS)) do @%append $@ FILE %i
   @%append $@ OPTION QUIET
-  @%append $@ OPTION DESCRIPTION '@$#libsdl org:$(VERSION)$#@Simple DirectMedia Layer Mixer'
+  @%append $@ OPTION DESCRIPTION '@$#ferzkopp.net:$(VERSION)$#@Simple DirectMedia Layer Mixer'
   @%append $@ LIBPATH $(DEPS_LIB)
   @for %i in ($(LIBS)) do @%append $@ LIB %i
   @%append $@ OPTION MAP=$*
