@@ -124,7 +124,7 @@ copy /y "..\$(Platform)\$(Configuration)\SDL2_gfx.dll" "$(TargetName)\$(Platform
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TestFramerate.c" />
+    <ClCompile Include="testframerate.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDL2_gfx.vcxproj">

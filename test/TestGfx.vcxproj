@@ -125,7 +125,7 @@ copy /y "*.bmp" "$(TargetName)\$(Platform)\$(Configuration)\"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TestGfx.c" />
+    <ClCompile Include="testgfx.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDL2_gfx.vcxproj">

@@ -125,7 +125,7 @@ copy /y ".\sample*.bmp" "$(TargetDir)
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TestRotozoom.c" />
+    <ClCompile Include="testrotozoom.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SDL2_gfx.vcxproj">
