@@ -10,7 +10,6 @@
   freely.
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -33,13 +32,13 @@ static SDLTest_CommonState *state;
 #define NUM_RANDOM	4096
 
 /* Coordinates */
-static Sint16 rx[NUM_RANDOM], rx[NUM_RANDOM], ry[NUM_RANDOM], ry[NUM_RANDOM];
+static Sint16 rx[NUM_RANDOM], ry[NUM_RANDOM];
 
 /* Triangles */
-static Sint16 tx1[NUM_RANDOM][3], tx1[NUM_RANDOM][3], ty1[NUM_RANDOM][3], ty1[NUM_RANDOM][3];
+static Sint16 tx1[NUM_RANDOM][3], ty1[NUM_RANDOM][3];
 
 /* Squares (made of 2 triangles) */
-static Sint16 sx1[NUM_RANDOM][6], sx1[NUM_RANDOM][6], sy1[NUM_RANDOM][6], sy1[NUM_RANDOM][6];
+static Sint16 sx1[NUM_RANDOM][6], sy1[NUM_RANDOM][6];
 
 /* Line widths */
 static Uint8 lw[NUM_RANDOM];
