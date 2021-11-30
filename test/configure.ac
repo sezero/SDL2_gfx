@@ -25,7 +25,7 @@ case "$host" in
         MATHLIB=""
         SYS_GL_LIBS="-lGL"
         ;;
-    *-*-darwin* )
+    *-*-darwin*)
         EXE=""
         MATHLIB=""
         SYS_GL_LIBS="-Wl,-framework,OpenGL"
@@ -54,6 +54,11 @@ case "$host" in
         EXE=""
         MATHLIB=""
         SYS_GL_LIBS="-lGLES_CM"
+        ;;
+    *-*-os2*)
+        EXE=".exe"
+        MATHLIB=""
+        SYS_GL_LIBS=""
         ;;
     *)
         EXE=""

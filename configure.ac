@@ -25,18 +25,20 @@ AC_SUBST(INTERFACE_AGE)
 AC_SUBST(BINARY_AGE)
 AC_SUBST(VERSION)
 
-# libtool versioning
+dnl libtool versioning
 LT_INIT([win32-dll])
 
 LT_RELEASE=$MAJOR_VERSION.$MINOR_VERSION
 LT_CURRENT=`expr $MICRO_VERSION - $INTERFACE_AGE`
 LT_REVISION=$INTERFACE_AGE
 LT_AGE=`expr $BINARY_AGE - $INTERFACE_AGE`
+LT_EXTRA="" dnl for OS2 dll name
 
 AC_SUBST(LT_RELEASE)
 AC_SUBST(LT_CURRENT)
 AC_SUBST(LT_REVISION)
 AC_SUBST(LT_AGE)
+AC_SUBST(LT_EXTRA)
 
 dnl Detect the canonical build and host environments
 AC_CANONICAL_HOST
@@ -45,9 +47,7 @@ dnl Setup for automake
 AM_INIT_AUTOMAKE(SDL2_gfx, $VERSION)
 
 dnl Check for tools
-AC_PROG_LIBTOOL
 AC_PROG_CC
-AC_PROG_OBJC
 AC_C_INLINE
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
@@ -56,7 +56,6 @@ if test -z "$host_alias"; then
 else
     hostaliaswindres="$host_alias-windres"
 fi
-AC_CHECK_PROGS(WINDRES, [windres $hostaliaswindres $host_os-windres])
 
 case "$host" in
     *-*-beos*)
@@ -72,43 +71,16 @@ case "$host" in
                 ac_default_prefix=$BUILD_PREFIX
             fi
         fi
-        if test x$WINDRES != x; then
-            use_version_rc=true
-        fi
         ;;
-    *-*-darwin*)
-        AC_ARG_ENABLE([imageio], [AC_HELP_STRING([--enable-imageio], [use native Mac OS X frameworks for loading images [default=yes]])],
-                      [], [enable_imageio=yes])
-        if test x$enable_imageio = xyes; then
-            IMG_LIBS="-Wl,-framework,ApplicationServices $IMG_LIBS"
-        else
-            CFLAGS="$CFLAGS -DSDL_IMAGE_USE_COMMON_BACKEND"
-        fi
+    *-*-os2*)
+        # disable static builds on os/2
+        enable_static=no
+        # -DBUILD_SDL is needed for DECLSPEC
+        CFLAGS="$CFLAGS -DBUILD_SDL"
+        # OS/2 does not support a DLL name longer than 8 characters.
+        LT_EXTRA="-os2dllname SDL2gfx"
         ;;
 esac
-
-dnl set this to use on systems that use lib64 instead of lib
-base_libdir=`echo \${libdir} | sed 's/.*\/\(.*\)/\1/; q'`
-
-dnl Function to find a library in the compiler search path
-find_lib()
-{
-    gcc_bin_path=[`$CC -print-search-dirs 2>/dev/null | fgrep programs: | sed 's/[^=]*=\(.*\)/\1/' | sed 's/:/ /g'`]
-    gcc_lib_path=[`$CC -print-search-dirs 2>/dev/null | fgrep libraries: | sed 's/[^=]*=\(.*\)/\1/' | sed 's/:/ /g'`]
-    env_lib_path=[`echo $LIBS $LDFLAGS $* | sed 's/-L[ ]*//g'`]
-    if test "$cross_compiling" = yes; then
-        host_lib_path=""
-    else
-        host_lib_path="/usr/$base_libdir /usr/local/$base_libdir"
-    fi
-    for path in $gcc_bin_path $gcc_lib_path $env_lib_path $host_lib_path; do
-        lib=[`ls -- $path/$1 2>/dev/null | sort | sed 's/.*\/\(.*\)/\1/; q'`]
-        if test x$lib != x; then
-            echo $lib
-            return
-        fi
-    done
-}
 
 dnl Check for NASM (for x86 assembly blit routines)
 AC_ARG_ENABLE(mmx,[  --enable-mmx            use mmx assembly on x86 [default=yes], disable this on non-x86 platforms],, enable_mmx=yes)
@@ -132,10 +104,6 @@ AM_PATH_SDL2($SDL_VERSION,
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 saved_LIBS="$LIBS"
-
-AC_SUBST([WINDRES])
-
-OBJCFLAGS=$CFLAGS
 
 # Finally create all the generated files
 AC_OUTPUT([

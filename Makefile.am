@@ -22,10 +22,7 @@ EXTRA_DIST =			\
 libSDL2_gfx_la_LDFLAGS = 	\
 	-no-undefined		\
 	-release $(LT_RELEASE)	\
-	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
-
-%.o : %.rc
-	$(WINDRES) $< $@
+	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) $(LT_EXTRA)
 
 # Rule to build tar-gzipped distribution package
 $(PACKAGE)-$(VERSION).tar.gz: distcheck
