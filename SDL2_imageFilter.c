@@ -47,7 +47,9 @@ him for his work.
 #if defined(USE_MMX) && (defined(__GNUC__) || defined(__clang__))
 #include <mmintrin.h>
 #endif
-#if defined(USE_MMX) && defined(__WATCOMC__)
+#if defined(__WATCOMC__)
+/* FIXME: Watcom doesn't support align directive in inline asm:
+ * https://github.com/open-watcom/open-watcom-v2/issues/521  */
 #pragma message("FIXME: do something about MMX code.")
 #endif
 #include "SDL_cpuinfo.h"
