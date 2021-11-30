@@ -243,7 +243,7 @@ void ExecuteTest(SDL_Renderer *renderer, PrimitivesTestCaseFp testCase, int test
         SDL_snprintf(titletext, TLEN, "Test %2i %20s: %10.1f /sec", testNum, testName, fps);
 		textlength = (Sint16)strlen(titletext);
 	    stringRGBA (renderer, WIDTH/2-4*textlength,30-4,titletext,255,255,255,255);
-		SDL_Log(titletext);
+		SDL_Log("%s", titletext);
     }
 }
 
@@ -1732,8 +1732,7 @@ int main(int argc, char *argv[])
                }
             }
         }
-                 
-           
+
         if (consumed < 0) {
             fprintf(stderr,
                     "Usage: %s %s [--test N]\n",
@@ -1742,7 +1741,7 @@ int main(int argc, char *argv[])
         }
         i += consumed;
     }
-    
+
     if (!SDLTest_CommonInit(state)) {
         return 2;
     }
