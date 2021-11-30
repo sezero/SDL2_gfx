@@ -42,17 +42,14 @@ him for his work.
 #include <stdlib.h>
 #include <string.h>
 
-#include "SDL.h"
-
 /* Use GCC intrinsics if available: they support both i386 and x86_64,
    provide ASM-grade performances, and lift the PUSHA/POPA issues. */
 #ifdef __GNUC__
 #  ifdef USE_MMX
 #    include <mmintrin.h>
 #  endif
-#  include <SDL_cpuinfo.h>
 #endif
-
+#include "SDL_cpuinfo.h"
 #include "SDL2_imageFilter.h"
 
 /*!
@@ -84,7 +81,7 @@ int SDL_imageFilterMMXdetect(void)
 		return (0);
 	}
 
-    return SDL_HasMMX();
+        return SDL_HasMMX();
 }
 
 /*!
