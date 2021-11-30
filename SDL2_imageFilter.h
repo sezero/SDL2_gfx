@@ -45,6 +45,12 @@ extern "C" {
 #      define SDL2_IMAGEFILTER_SCOPE __declspec(dllimport)
 #    endif
 #  endif
+#elif defined(__OS2__)
+#  if defined(DLL_EXPORT) && !defined(LIBSDL2_GFX_DLL_IMPORT)
+#    define SDL2_IMAGEFILTER_SCOPE __declspec(dllexport)
+#  else
+#    define SDL2_IMAGEFILTER_SCOPE   extern
+#  endif
 #endif
 #ifndef SDL2_IMAGEFILTER_SCOPE
 #  define SDL2_IMAGEFILTER_SCOPE extern

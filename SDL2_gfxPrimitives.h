@@ -59,6 +59,12 @@ extern "C" {
 #      define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllimport)
 #    endif
 #  endif
+#elif defined(__OS2__)
+#  if defined(DLL_EXPORT) && !defined(LIBSDL2_GFX_DLL_IMPORT)
+#    define SDL2_GFXPRIMITIVES_SCOPE __declspec(dllexport)
+#  else
+#    define SDL2_GFXPRIMITIVES_SCOPE   extern
+#  endif
 #endif
 #ifndef SDL2_GFXPRIMITIVES_SCOPE
 #  define SDL2_GFXPRIMITIVES_SCOPE extern
