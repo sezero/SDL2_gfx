@@ -1642,8 +1642,7 @@ L91117:
 	/* i386 and x86_64 */
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
-        __m64 mm1;
-	mm1 = _m_pcmpeqb(mm1, mm1);		/* generate all 1's in mm1 */
+	__m64 mm1 = _m_pcmpeqb(mm1, mm1);		/* generate all 1's in mm1 */
 	int i;
 	for (i = 0; i < SrcLength/8; i++) {
 		*mDest = _m_pxor(*mSrc1, mm1);	/* negate mm0 by xoring with mm1 */
@@ -1757,11 +1756,12 @@ L1021:
 	/* i386 and x86_64 */
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
-	/* Duplicate C in 8 bytes of MM1 */
+	__m64 mm1, mm2;
 	int i;
+	/* Duplicate C in 8 bytes of MM1 */
 	memset(&i, C, 4);
-	__m64 mm1 = _m_from_int(i);
-	__m64 mm2 = _m_from_int(i);
+	mm1 = _m_from_int(i);
+	mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
         //__m64 mm1 = _m_from_int64(lli); // x86_64 only
 	for (i = 0; i < SrcLength/8; i++) {
@@ -1887,12 +1887,12 @@ L11023:
 	/* i386 and x86_64 */
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
+	int i;
 	/* Duplicate (int)C in 8 bytes of MM1 */
 	__m64 mm1 = _m_from_int(C);
 	__m64 mm2 = _m_from_int(C);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
         //__m64 mm1 = _m_from_int64(lli); // x86_64 only
-	int i;
 	for (i = 0; i < SrcLength/8; i++) {
 		*mDest = _m_paddusb(*mSrc1, mm1);	/* Src1+C (add 8 bytes with saturation) */
 		mSrc1++;
@@ -2032,11 +2032,12 @@ L1022:
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
 	__m64 *mMask = (__m64*)Mask;
-	/* Duplicate C in 8 bytes of MM1 */
+	__m64 mm1, mm2;
 	int i;
+	/* Duplicate C in 8 bytes of MM1 */
 	memset(&i, C, 4);
-	__m64 mm1 = _m_from_int(i);
-	__m64 mm2 = _m_from_int(i);
+	mm1 = _m_from_int(i);
+	mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
         //__m64 mm1 = _m_from_int64(lli); // x86_64 only
 	for (i = 0; i < SrcLength/8; i++) {
@@ -2163,11 +2164,12 @@ L1023:
 	/* i386 and x86_64 */
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
-	/* Duplicate C in 8 bytes of MM1 */
+	__m64 mm1, mm2;
 	int i;
+	/* Duplicate C in 8 bytes of MM1 */
 	memset(&i, C, 4);
-	__m64 mm1 = _m_from_int(i);
-	__m64 mm2 = _m_from_int(i);
+	mm1 = _m_from_int(i);
+	mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
         //__m64 mm1 = _m_from_int64(lli); // x86_64 only
 	for (i = 0; i < SrcLength/8; i++) {
@@ -2293,12 +2295,12 @@ L11024:
 	/* i386 and x86_64 */
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
+	int i;
 	/* Duplicate (int)C in 8 bytes of MM1 */
 	__m64 mm1 = _m_from_int(C);
 	__m64 mm2 = _m_from_int(C);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
         //__m64 mm1 = _m_from_int64(lli); // x86_64 only
-	int i;
 	for (i = 0; i < SrcLength/8; i++) {
 		*mDest = _m_psubusb(*mSrc1, mm1);	/* Src1-C (sub 8 bytes with saturation) */
 		mSrc1++;
@@ -2732,8 +2734,7 @@ L10252:
 	__m64 *mDest = (__m64*)Dest;
 	__m64 mm0 = _m_from_int(0);				/* zero mm0 register */
 	/* Duplicate C in 4 words of MM1 */
-	int i;
-	i = C | C<<16;
+	int i = C | C<<16;
 	__m64 mm1 = _m_from_int(i);
 	__m64 mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);				/* fill higher words of MM1 with C */
@@ -2904,8 +2905,7 @@ L1026:
 	__m64 *mDest = (__m64*)Dest;
 	__m64 mm0 = _m_from_int(0);			/* zero mm0 register */
 	/* Duplicate C in 4 words of MM1 */
-	int i;
-	i = (C<<16)|C;
+	int i = (C<<16)|C;
 	__m64 mm1 = _m_from_int(i);
 	__m64 mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher words of MM1 with C */
@@ -3500,10 +3500,11 @@ L1029:
 	/* Duplicate T in 8 bytes of MM3 */
 	__m64 mm1 = _m_pcmpeqb(mm1, mm1);			/* generate all 1's in mm1 */
 	__m64 mm2 = _m_pcmpeqb(mm2, mm2);			/* generate all 1's in mm1 */
+	__m64 mm3, mm4;
 	int i;
 	memset(&i, T, 4);
-	__m64 mm3 = _m_from_int(i);
-	__m64 mm4 = _m_from_int(i);
+	mm3 = _m_from_int(i);
+	mm4 = _m_from_int(i);
 	mm3 = _m_punpckldq(mm3, mm4);			/* fill higher bytes of MM3 with T */
 	mm2 = _m_psubusb(mm2, mm3);			/* store 0xFF - T in MM2 */
         //__m64 mm3 = _m_from_int64(lli); // x86_64 only
@@ -3646,8 +3647,9 @@ L1030:
 	__m64 *mDest = (__m64*)Dest;
 	__m64 mm1 = _m_pcmpeqb(mm1, mm1);	/* generate all 1's in mm1 */
 	int i;
-	/* Duplicate Tmax in 8 bytes of MM3 */
 	__m64 mm3, mm4;
+	__m64 mm5, mm7;
+	/* Duplicate Tmax in 8 bytes of MM3 */
 	memset(&i, Tmax, 4);
 	mm3 = _m_from_int(i);
 	mm4 = _m_from_int(i);
@@ -3655,7 +3657,6 @@ L1030:
 	mm1 = _m_psubusb(mm1, mm3);		/* store 0xFF - Tmax in MM1 */
         //__m64 mm3 = _m_from_int64(lli); // x86_64 only
 	/* Duplicate Tmax in 8 bytes of MM3 */
-	__m64 mm5, mm7;
 	memset(&i, Tmin, 4);
 	mm5 = _m_from_int(i);
 	mm4 = _m_from_int(i);
@@ -3839,6 +3840,7 @@ L1031:
 	__m64 *mSrc1 = (__m64*)Src1;
 	__m64 *mDest = (__m64*)Dest;
 	__m64 mm0, mm1, mm2, mm3;
+	__m64 mm7;
 
 	int i;
 	/* Duplicate (Nmax-Nmin)/(Cmax-Cmin) in 4 words of MM0 */
@@ -3863,7 +3865,7 @@ L1031:
 	mm2 = _m_from_int(i);
 	mm3 = _m_from_int(i);
 	mm2 = _m_punpckldq(mm2, mm3);			/* fill higher words of MM2 with Nmin */
-	__m64 mm7 = _m_from_int(0);			/* zero mm0 register */
+	mm7 = _m_from_int(0);				/* zero mm0 register */
 	for (i = 0; i < SrcLength/8; i++) {
 		__m64 mm3, mm4, mm5, mm6;
 		mm3 = _m_punpcklbw(*mSrc1, mm7);	/* unpack low  bytes of Src1 into words */
