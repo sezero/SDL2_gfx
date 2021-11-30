@@ -1794,7 +1794,19 @@ __declspec(naked) long int
 #else
 #error lrint needed for MSVC on non X86/AMD64/ARM targets.
 #endif
-#endif
+
+#elif defined(__WATCOMC__) && defined(__386__) && !defined(HAVE_LRINT)
+extern __inline long double2int(double);
+#pragma aux double2int = \
+    "push  eax" \
+    "fistp dword ptr [esp]" \
+    "pop   eax" \
+    parm [8087] \
+    value [eax] \
+    modify exact [eax];
+#undef  lrint
+#define lrint  double2int
+#endif /**/
 
 /*!
 \brief Draw anti-aliased ellipse with blending.
