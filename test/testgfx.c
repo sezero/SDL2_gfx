@@ -1447,8 +1447,8 @@ int TestThickLineAccuracy(SDL_Renderer *renderer)
 		/* Accuracy test #2 */
 		for (i = 0; i <= 360; i += astep) {
 			a = 2.0 * M_PI * (double)i / 360.0;
-			dx = (int)(84.0 * SDL_sin(a));
-			dy = (int)(84.0 * SDL_cos(a));
+			dx = (int)(84.0 * sin(a));
+			dy = (int)(84.0 * cos(a));
 			width = wstep * (w + 1);
 			thickLineRGBA(renderer, cx, cy, cx + dx, cy + dy, width, 255, 255, 255, 255);
 		}

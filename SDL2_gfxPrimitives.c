@@ -3784,9 +3784,9 @@ int thickLineRGBA(SDL_Renderer *renderer, Sint16 x1, Sint16 y1, Sint16 x2, Sint1
 	/* Calculate offsets for sides */
 	dx = (double)(x2 - x1);
 	dy = (double)(y2 - y1);
-	l = SDL_sqrt(dx*dx + dy*dy);
-	ang = SDL_atan2(dx, dy);
-	adj = 0.1 + 0.9 * SDL_fabs(SDL_cos(2.0 * ang));
+	l = sqrt(dx*dx + dy*dy);
+	ang = atan2(dx, dy);
+	adj = 0.1 + 0.9 * fabs(cos(2.0 * ang));
 	wl2 = ((double)width - adj)/(2.0 * l);
 	nx = dx * wl2;
 	ny = dy * wl2;
