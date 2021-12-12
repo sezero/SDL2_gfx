@@ -3972,6 +3972,8 @@ int SDL_imageFilterNormalizeLinear(unsigned char *Src, unsigned char *Dest, unsi
 
 /* ------------------------------------------------------------------------------------ */
 
+#if 0  /* These are not exported in SDL2_gfx */
+
 /*!
 \brief Filter using ConvolveKernel3x3Divide: Dij = saturation0and255( ... ) 
 
@@ -7309,3 +7311,5 @@ L10412:
 	/* No non-MMX implementation yet */
 	return (-1);
 }
+
+#endif /* #if 0 */
