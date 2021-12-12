@@ -970,7 +970,7 @@ L1015:
 	__m64 mm0 = _m_from_int(0); /* zero mm0 register */
 	int i;
 	for (i = 0; i < SrcLength/8; i++) {
-		__m64 mm1, mm2, mm3, mm4, mm5, mm6;
+		__m64 mm1, mm2, mm3, mm4;
 		mm1 = _m_punpcklbw(*mSrc1, mm0);	/* unpack low  bytes of Src1 into words */
 		mm2 = _m_punpckhbw(*mSrc1, mm0);	/* unpack high bytes of Src1 into words */
 		mm3 = _m_punpcklbw(*mSrc2, mm0);	/* unpack low  bytes of Src2 into words */
@@ -1110,7 +1110,7 @@ L1016:
 	__m64 mm0 = _m_from_int(0); /* zero mm0 register */
 	int i;
 	for (i = 0; i < SrcLength/8; i++) {
-		__m64 mm1, mm2, mm3, mm4, mm5, mm6;
+		__m64 mm1, mm2, mm3, mm4;
 		mm1 = _m_punpcklbw(*mSrc1, mm0);	/* unpack low  bytes of Src1 into words */
 		mm2 = _m_punpckhbw(*mSrc1, mm0);	/* unpack high bytes of Src1 into words */
 		mm3 = _m_punpcklbw(*mSrc2, mm0);	/* unpack low  bytes of Src2 into words */
@@ -2919,7 +2919,7 @@ L1026:
 	__m64 mm2 = _m_from_int(i);
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher words of MM1 with C */
 	for (i = 0; i < SrcLength/8; i++) {
-		__m64 mm3, mm4, mm5, mm6;
+		__m64 mm3, mm4;
 		mm3 = _m_punpcklbw(*mSrc1, mm0);	/* unpack low  bytes of Src1 into words */
 		mm4 = _m_punpckhbw(*mSrc1, mm0);	/* unpack high bytes of Src1 into words */
 		mm3 = _m_psrlwi(mm3, N);		/* shift 4 WORDS of MM3 (N) bits to the right */
