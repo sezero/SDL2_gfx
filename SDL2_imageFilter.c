@@ -2051,7 +2051,7 @@ L1022:
 	mm1 = _m_punpckldq(mm1, mm2);			/* fill higher bytes of MM1 with C */
 	//__m64 mm1 = _m_from_int64(lli); // x86_64 only
 	for (i = 0; i < SrcLength/8; i++) {
-		__m64 mm2 = _m_psrlwi(*mSrc1, 1);	/* shift 4 WORDS of MM2 1 bit to the right */
+		mm2 = _m_psrlwi(*mSrc1, 1);		/* shift 4 WORDS of MM2 1 bit to the right */
 		mm2 = _m_pand(mm2, *mMask);		/* apply Mask to 8 BYTES of MM2 */
 							/* byte     0x0f, 0xdb, 0xd0 */
 		*mDest = _m_paddusb(mm1, mm2);		/* Src1+C (add 8 bytes with saturation) */
@@ -3876,7 +3876,7 @@ L1031:
 	mm2 = _m_punpckldq(mm2, mm3);			/* fill higher words of MM2 with Nmin */
 	mm7 = _m_from_int(0);				/* zero mm0 register */
 	for (i = 0; i < SrcLength/8; i++) {
-		__m64 mm3, mm4, mm5, mm6;
+		__m64 mm4, mm5, mm6;
 		mm3 = _m_punpcklbw(*mSrc1, mm7);	/* unpack low  bytes of Src1 into words */
 		mm4 = _m_punpckhbw(*mSrc1, mm7);	/* unpack high bytes of Src1 into words */
 		mm3 = _m_psubusb(mm3, mm1);		/* S-Cmin, low	bytes */
