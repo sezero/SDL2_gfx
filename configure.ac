@@ -1,5 +1,5 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(README)
+AC_INIT(SDL2_gfxPrimitives.c)
 
 dnl Set various version strings - taken gratefully from the GTk sources
 
